@@ -2,24 +2,24 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const methodOverride = require('method-override');
-
 const mainRouter = require('./routes/main');
-const indexRouter = require('./routes/index');
+//const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
+const session = require('express-session')
+const sesionIniciadaMiddleware = require('./middlewares/sesionIniciada'); 
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({extended: false})); // recibe un objeto literal 
 app.use(express.json()); // para ver los datos en el navegador
 app.use(methodOverride('_method')); 
-
-// Cuchame, Express... Vas a usar de motor de vista EJS...
-app.set('view engine', 'ejs');
-// Cuchame, Express.. Hay una carpeta que tiene todas las vistas. Es esta...
-app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(session( {secret: "May the force be with you!"})); 
+app.use(sesionIniciadaMiddleware); 
 
-app.use('/index', indexRouter);
-app.use('/main', mainRouter);
+app.use('/', mainRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 

@@ -5,7 +5,9 @@ const path = require('path');
 
 let mainController = {
     index: function(req, res) {
-        res.render('index', { mensaje: "Bienvenidos a nuestra página..." });
+        res.render('index', { 
+            mensaje: "Bienvenidos a nuestra página...",
+        });
     },
 
     contacto: function(req, res) {

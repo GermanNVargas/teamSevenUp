@@ -1,30 +1,39 @@
 const fs = require ('fs');
 const path = require('path');
-const bcrypt = require('bcrypt');
-//const express = require('express');
+const bcryptjs = require('bcryptjs');
+const { validationResult } = require('express-validator');
 
 let usuarios = fs.readFileSync(path.join(__dirname, '../database/users.json'), 'utf8');
-let usuariosGuardados = JSON.parse(usuarios);
+usuarios = JSON.parse(usuarios);
 
 module.exports = {
     register: function(req, res) {
         res.render('register')
     },
 
-    create: function(req, res) {
-        //return res.send(usuarios[0]); // > ESTO ES UN JSON
-        // usuariosGuardados.push(req.body);  > ESTO MANDA TODO EL BODY      
-
-        usuariosGuardados.push({
-            name: req.body.name, 
-            email: req.body.email,
-            password:  bcrypt.hashSync(req.body.password, 12),
-            avatar: req.body.avatar
-        }); // > ESTO MANDA SOLO LOS OBJETOS DEL BODY QUE YO SELECCIONO, NO INCLUYO EL REPASSWORD
-
-        fs.writeFileSync(path.join(__dirname, '../database/users.json'), JSON.stringify(usuariosGuardados, null, 4));
-        //return res.send("LISTO");
-        return res.render('usuarioCreado');
+    save: function(req, res) {
+        let errors = validationResult(req);
+        
+        if( errors.isEmpty() ) {
+            // no hay errores. Vamos por acá...
+            let nuevoUsuario = {
+                name: req.body.name,
+                /*apellido: req.body.apellido,*/
+                email: req.body.email,
+                avatar: req.file.filename,
+                password: bcryptjs.hashSync(req.body.password, 12)
+            }
+            usuarios.push(nuevoUsuario)
+            fs.writeFileSync(path.join(__dirname, '../database/users.json'), JSON.stringify(usuarios, null, 4));
+            res.redirect('/')
+            
+        } else {
+            // hay errores. Entonces...
+            // res.send( validationResult(req).mapped() )
+            return res.render('register', {
+                errors: errors.mapped()
+            })
+        }
     },  
 
     login: function(req, res) {
@@ -41,16 +50,25 @@ module.exports = {
     },
     
     checkLogin: function(req, res) {
-        for (let i = 0; i < usuariosGuardados.length; i++) {
-            if(req.body.email == usuariosGuardados[i].email){
-                if (bcrypt.compareSync(req.body.password, usuariosGuardados[i].password)){
-                    //return res.send("Bienvenido a tu perfil");
-                    return res.render('perfilCliente');
+        let emailUsuario = req.body.email; 
+        let passUsuario = req.body.password; 
+
+        for(let i = 0; i < usuarios.length; i++) {
+            if(emailUsuario == usuarios[i].email) {
+                if ( bcryptjs.compareSync(passUsuario, usuarios[i].password) ) {
+                    // TODO ESTÁ BIEN
+                    req.session.datosUsuario = {
+                        name: usuarios[i].name,
+                        email: usuarios[i].email,
+                        avatar: usuarios[i].avatar 
+                    }; 
+                    res.send(req.session) 
                 } else {
-                    return res.send("Los datos ingresados son incorrectos")
+                    res.send("Los datos ingresados no son correctos")
                 }
+            } else {
+                res.send("No existe un usuario registrado con este mail")
             }
-            return res.send("Este usuario no existe en nuestra base de datos");
         }
     }    
 }
