@@ -1,0 +1,41 @@
+[
+    {
+        "name": "Prueba",
+        "apellido": "prueba",
+        "email": "prueba@prueba.com",
+        "avatar": "prueba@prueba.com- Milanga1611102836430.png",
+        "password": "$2a$12$65.K2B.4boH9gpb0oHNwnurMUCJiOsxcuY31CbY6KEh1C1mZA9RN2"
+    },
+    {
+        "name": "German",
+        "email": "ger.vargas@live.com.ar",
+        "avatar": "ger.vargas@live.com.ar- Milanga1609713852673.png",
+        "password": "$2a$12$tnJ4xbSaMvaSI3tZUND0YO/4.u8Yl6rKyguBnhHXHE8mZBZL4VjbG"
+    },
+    {
+        "name": "Julian",
+        "email": "juli@hotmail.com",
+        "avatar": "juli@hotmail.com- Milanga1609808330202.png",
+        "password": "$2a$12$NZh/QT23iSe7deUZOnChR.X2RMHigcNHK/sdEmpo0Vy9pv1yTWbOm"
+    },
+    {
+        "name": "graciela",
+        "email": "graciela@hotmail.com",
+        "avatar": "graciela@hotmail.com- Milanga1610224146303.png",
+        "password": "$2a$12$awB4UtjqRh13QgZZI7GiVeP/MINaYf1E5pelMlcI2MuTVuzV1h6HC"
+    },
+    {
+        "name": "German",
+        "email": "ger@hotmail.com",
+        "avatar": "ger@hotmail.com- Milanga1610753772377.png",
+        "password": "$2a$12$uf7Sn6LvH2ZNNXn7ARnuY.1eBxmyyM/heBiegaNy8nygztQOVwRY."
+    },
+    {
+        "name": "Digital",
+        "apellido": "Digital",
+        "email": "digital@digital.com",
+        "avatar": "digital@digital.com- Milanga1610754516374.png",
+        "password": "$2a$12$LeKpbE/W6ncXaUwdxjcDPunxUPGfx0pTCP1KLNTdke1HNOETJL7wa"
+    }
+    
+]
