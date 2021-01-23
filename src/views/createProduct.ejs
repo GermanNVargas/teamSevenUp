@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', {title: "Formulario Producto"}) %>
+<body>
+    <%- include('partials/header') %>
+
+    <main class="panelDeIngreso">
+        <section>
+            <h2>Crear producto</h2>
+        </section>
+
+        <section class="form">
+            <form action="" method="POST" enctype="multipart/form-data">
+                <!-- PROBAR ACA -->
+                <div>
+                    <label for="nameProducto">Nombre del producto</label>
+                    <input id="nameProducto" name="nameProducto" type="text" placeholder="Nombre Producto...">
+                </div>                
+                <div>
+                    <label for="detalleProducto">Detalle del producto</label>
+                    <input id="detalleProducto" name="detalleProducto" type="text" placeholder="Detalle Producto...">
+                </div> 
+                <div>
+                    <label for="precio">Precio</label>
+                    <input id="precio" name="precio" type="text" placeholder="ingrese aquí el precio">
+                </div>              
+                <div>
+                    <label for="">Imagen</label>
+                    <input id="image" type="file" name="image">
+                </div>                
+                <div class="cta-panel">
+                    <div>
+                        <button type="submit" class="btn btn-primary">CREAR PRODUCTO</button>
+                    </div>
+                </div>
+                <hr>
+            </form>
+        </section>
+    </main>
+
+    <%- include('partials/footer') %>
+    
+</body>
+</html>

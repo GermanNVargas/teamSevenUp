@@ -27,5 +27,6 @@ router.post('/register', upload.single('avatar'), usersValidator.checkRegister ,
 
 router.get('/login', usersController.login);
 router.post('/login', usersController.checkLogin);
+router.get('/logout', usersController.logout)
 
 module.exports = router;

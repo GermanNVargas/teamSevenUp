@@ -2,8 +2,9 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const methodOverride = require('method-override');
+
 const mainRouter = require('./routes/main');
-//const indexRouter = require('./routes/index');
+const adminRouter = require('./routes/admin'); 
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
 const session = require('express-session')
@@ -20,6 +21,7 @@ app.use(session( {secret: "May the force be with you!"}));
 app.use(sesionIniciadaMiddleware); 
 
 app.use('/', mainRouter);
+app.use('/admin', adminRouter); 
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 

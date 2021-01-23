@@ -14,9 +14,17 @@
 
     <div class="header-access-panel">
         <section>
+            <% if(typeof hayUnUsuario != 'undefined') { %>
+            <ul>
+                <li><h3>Bienvenido <%= hayUnUsuario.name %></h3></li>
+                <li><a href="/users/logout">Cerrar sesión</a></li>
+            </ul>    
+            <% } else { %>
+            <ul>
             <a href="/users/login"><i class="fas fa-sign-in-alt fa-2x"></i></a>
             <a href="/users/register"><i class="fas fa-user-circle fa-2x"></i></a>
             </ul>
+            <% } %> 
         </section>
         <section>
             <a href="/main/carrito"><i class="fas fa-shopping-cart fa-2x"></i></a>

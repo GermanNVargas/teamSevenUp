@@ -19,6 +19,7 @@ router.get('/notFound', mainController.notFound);
 router.get('/carrito', mainController.carrito);
 router.get('/carritoVacio', mainController.carritoVacio);
 router.get('/busqueda', mainController.busqueda);
+router.get('/profile', mainController.profile); 
 
 
 module.exports = router;

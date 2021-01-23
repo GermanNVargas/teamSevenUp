@@ -6,6 +6,13 @@ const { validationResult } = require('express-validator');
 let usuarios = fs.readFileSync(path.join(__dirname, '../database/users.json'), 'utf8');
 usuarios = JSON.parse(usuarios);
 
+let lastId = 0; 
+for(let i = 0; i < usuarios.length; i++) {
+    if(lastId < usuarios[i].id) {
+        lastId = usuarios[i].id
+    }
+}
+
 module.exports = {
     register: function(req, res) {
         res.render('register')
@@ -17,6 +24,7 @@ module.exports = {
         if( errors.isEmpty() ) {
             // no hay errores. Vamos por acá...
             let nuevoUsuario = {
+                id: lastId + 1,
                 name: req.body.name,
                 apellido: req.body.apellido,
                 email: req.body.email,
@@ -63,11 +71,15 @@ module.exports = {
                         email: usuarios[i].email,
                         avatar: usuarios[i].avatar 
                     }; 
-                    return res.send(req.session) 
+                    return res.redirect('/')
                 } else {
                     return res.send("Los datos ingresados no son correctos")
                 } 
             } 
         } return res.send("No existe un usuario registrado con este email"); 
+    }, 
+    logout: function(req, res) {
+        req.session.destroy(); 
+        res.redirect('/')
     }    
 }

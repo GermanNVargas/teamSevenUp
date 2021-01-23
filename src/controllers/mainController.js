@@ -64,6 +64,9 @@ let mainController = {
 
     blog: function(req, res) {
         res.render('blog');        
+    }, 
+    profile: function(req, res) {
+        res.render('perfilCliente'); 
     }
 };
 
