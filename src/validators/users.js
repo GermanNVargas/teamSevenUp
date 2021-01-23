@@ -11,5 +11,13 @@ module.exports = {
         check('password')
             .isLength({min:6, max:15})
             .withMessage('Su contraseña debe tener como mínimo 6 caracteres y como máximo 15')
+    ], 
+    loginValidator: [
+        check('name')
+            .notEmpty().withMessage('Este campo es obligatorio').bail()
+            .isLength({min: 2, max: 30}).withMessage('Debes ingresar un email válido'), 
+            check('password')
+            .isLength({min:6, max:15})
+            .withMessage('Su contraseña debe tener como mínimo 6 caracteres y como máximo 15')    
     ]
 }

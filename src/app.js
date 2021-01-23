@@ -1,13 +1,14 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+//const cookieParser = require('cookie-parser'); 
 const methodOverride = require('method-override');
+const session = require('express-session')
 
 const mainRouter = require('./routes/main');
 const adminRouter = require('./routes/admin'); 
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
-const session = require('express-session')
 const sesionIniciadaMiddleware = require('./middlewares/sesionIniciada'); 
 
 app.set('view engine', 'ejs');

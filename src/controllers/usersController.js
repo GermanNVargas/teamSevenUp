@@ -81,5 +81,11 @@ module.exports = {
     logout: function(req, res) {
         req.session.destroy(); 
         res.redirect('/')
-    }    
+    }, 
+    profile: function(req, res) {
+        res.render('perfilCliente')
+    }, 
+    return : function(req, res) {
+        return res.redirect('/')
+    }  
 }

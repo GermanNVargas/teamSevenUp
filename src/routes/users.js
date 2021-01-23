@@ -9,6 +9,7 @@ const usersController = require('../controllers/usersController');
 const userRouteMiddleware = require('../middlewares/userRouteMiddleware'); 
 //const userRouteMiddleware = require('../middlewares/usuarioLogueadoMiddleware');
 const usersValidator = require('../validators/users');
+const guestMiddleware = require('../middlewares/guestMiddleware'); 
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -22,11 +23,13 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 // el prefijo utilizado es: /users...
-router.get('/register', userRouteMiddleware, usersController.register);
-router.post('/register', upload.single('avatar'), usersValidator.checkRegister , usersController.save);
+router.get('/register', guestMiddleware , usersController.register);
+router.post('/register', upload.single('avatar'), usersValidator.checkRegister , usersController.save)
 
-router.get('/login', usersController.login);
-router.post('/login', usersController.checkLogin);
+router.get('/login', guestMiddleware , usersController.login);
+router.post('/login', usersValidator.loginValidator, usersController.checkLogin);
 router.get('/logout', usersController.logout)
+
+router.get('/profile', usersController.profile); 
 
 module.exports = router;
