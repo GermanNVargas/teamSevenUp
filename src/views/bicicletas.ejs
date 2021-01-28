@@ -7,19 +7,13 @@
 
     <!-- GALERIA DE PRODUCTOS -->
     <main class="galeria-de-productos">
-        <h2>Galería de Productos</h2>
-        <article>
-            <% products.forEach(producto => { %> 
-            <img src="../images/banners/Banner-Hot-Stuff-1.jpg" alt="Bicicleta Destacada # 1" />
-            <h3><%= producto.name %> </h3>
-            <h4><%= producto.precio %></h4>
-            <div>
+        <h2>Galería de Productos</h2> 
+        <% for(let i = 0; i < usersResults.length; i++) {%> 
+            <article>
+                <h2><%= usersResults[i].nombre %></h2>
                 <a href="/products/detalleDeProducto" class="btn-buy">Comprar</a><a href="/products/detalleDeProducto" class="btn-view-more">Ver Más</a>
-            </div>
-            <% }) %> 
-        </>
-        
-        
+            </article>    
+        <% } %> 
     </main>
     
     <!-- FOOTER -->        

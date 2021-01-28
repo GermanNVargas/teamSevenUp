@@ -20,6 +20,5 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 router.get('/products/create', productsController.create); 
-router.post('/products/create',upload.single('image'), productsController.store); 
 
 module.exports = router;

@@ -1,13 +1,21 @@
 const fs = require('fs');
 const path = require('path');
+let db = require('../database/models/index'); 
 
 // RUTA ------> CONTROLADOR -------> VISTA
 
 let mainController = {
     index: function(req, res) {
-        res.render('index', { 
-            mensaje: "Bienvenidos a nuestra página...",
-        });
+        db.sequelize.query("SELECT * FROM usuarios")
+        .then(function(usersResults) {
+            res.render('bicicletas', {
+                usersResults: usersResults[0]
+            }); 
+        })
+        
+        //res.render('index', { 
+        //    mensaje: "Bienvenidos a nuestra página...",
+        //});
     },
 
     contacto: function(req, res) {
@@ -64,9 +72,6 @@ let mainController = {
 
     blog: function(req, res) {
         res.render('blog');        
-    }, 
-    profile: function(req, res) {
-        res.render('perfilCliente'); 
     }
 };
 

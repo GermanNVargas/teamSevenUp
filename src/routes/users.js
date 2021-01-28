@@ -24,10 +24,8 @@ var upload = multer({ storage: storage })
 
 // el prefijo utilizado es: /users...
 router.get('/register', guestMiddleware , usersController.register);
-router.post('/register', upload.single('avatar'), usersValidator.checkRegister , usersController.save)
 
 router.get('/login', guestMiddleware , usersController.login);
-router.post('/login', usersValidator.loginValidator, usersController.checkLogin);
 router.get('/logout', usersController.logout)
 
 router.get('/profile', usersController.profile); 
